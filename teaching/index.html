@@ -1,1 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI農業創作教學系統</title>
+  <style>
+    :root{
+      --green:#2f7d4b;
+      --light:#f3faf5;
+      --dark:#1f3d2b;
+      --card:#ffffff;
+      --line:#d9eadf;
+      --yellow:#fff8df;
+    }
 
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:"Noto Sans TC","Microsoft JhengHei",Arial,sans-serif;
+      background:#f7faf7;
+      color:#243528;
+      line-height:1.7;
+    }
+
+    header{
+      background:linear-gradient(135deg,#2f7d4b,#7abf73);
+      color:white;
+      padding:56px 20px;
+      text-align:center;
+    }
+
+    header h1{
+      margin:0;
+      font-size:2.2rem;
+      letter-spacing:1px;
+    }
+
+    header p{
+      margin:14px auto 0;
+      max-width:760px;
+      font-size:1.05rem;
+    }
+
+    .wrap{
+      max-width:1100px;
+      margin:auto;
+      padding:32px 18px 60px;
+    }
+
+    .section-title{
+      text-align:center;
+      margin:34px 0 20px;
+    }
+
+    .section-title h2{
+      color:var(--dark);
+      margin-bottom:8px;
+    }
+
+    .notice{
+      background:var(--yellow);
+      border:1px solid #f0d98a;
+      border-radius:16px;
+      padding:18px 20px;
+      margin:24px 0;
+    }
+
+    .steps{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+      gap:16px;
+      margin-top:20px;
+    }
+
+    .step{
+      background:white;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:20px;
+      box-shadow:0 4px 14px rgba(0,0,0,.04);
+    }
+
+    .step b{
+      color:var(--green);
+      display:block;
+      margin-bottom:8px;
+    }
+
+    .form-box{
+      background:white;
+      border-radius:20px;
+      padding:24px;
+      border:1px solid var(--line);
+      box-shadow:0 4px 16px rgba(0,0,0,.05);
+      margin-top:22px;
+    }
+
+    label{
+      font-weight:700;
+      display:block;
+      margin:14px 0 6px;
+      color:#294b35;
+    }
+
+    input, select, textarea{
+      width:100%;
+      padding:12px 14px;
+      border:1px solid #cfe1d4;
+      border-radius:12px;
+      font-size:1rem;
+      font-family:inherit;
+    }
+
+    textarea{
+      min-height:90px;
+      resize:vertical;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:18px;
+    }
+
+    .btn{
+      border:none;
+      background:var(--green);
+      color:white;
+      padding:12px 18px;
+      border-radius:999px;
+      font-size:1rem;
+      cursor:pointer;
+      margin-top:18px;
+      font-weight:700;
+    }
+
+    .btn:hover{
+      background:#25663d;
+    }
+
+    .btn.secondary{
+      background:#f0f6f1;
+      color:#2f7d4b;
+      border:1px solid #cfe1d4;
+    }
+
+    .prompt-card{
+      background:white;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:20px;
+      margin-bottom:18px;
+      box-shadow:0 4px 14px rgba(0,0,0,.04);
+    }
+
+    .prompt-card h3{
+      margin-top:0;
+      color:var(--dark);
+    }
+
+    pre{
+      white-space:pre-wrap;
+      word-break:break-word;
+      background:#f6fbf7;
+      border:1px dashed #b9d7c1;
+      padding:16px;
+      border-radius:14px;
+      font-size:.95rem;
+    }
+
+    .footer{
+      text-align:center;
+      padding:30px 20px;
+      background:#eaf5ed;
+      color:#46634f;
+      font-size:.9rem;
+    }
+
+    .tag{
+      display:inline-block;
+      background:#e9f6ec;
+      color:#2f7d4b;
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:.85rem;
+      margin-bottom:10px;
+    }
+
+    .copy-ok{
+      position:fixed;
+      left:50%;
+      bottom:28px;
+      transform:translateX(-50%);
+      background:#243528;
+      color:white;
+      padding:12px 18px;
+      border-radius:999px;
+      display:none;
+      z-index:99;
+      box-shadow:0 6px 18px rgba(0,0,0,.25);
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>🌱 AI農業創作教學系統</h1>
+  <p>用 AI，讓農業被更多人看見。這是一套結合農產品、品牌故事、社群文案、短影音腳本與圖像創作的教學工具。</p>
+</header>
+
+<main class="wrap">
+
+  <div class="notice">
+    <strong>平台定位：</strong><br>
+    本系統為農業教育與學生創作輔助工具，協助學生練習農產品品牌故事、社群行銷與AI創作。  
+    本平台不接觸金錢交易、不代售農產品、不處理訂單，僅作為教育推廣與品牌故事展示之用。
+  </div>
+
+  <section>
+    <div class="section-title">
+      <h2>一、課程流程</h2>
+      <p>學生不是只學 AI，而是用 AI 創造真實農業價值。</p>
+    </div>
+
+    <div class="steps">
+      <div class="step"><b>Step 1｜採訪</b>認識農民、農場、作物與故事。</div>
+      <div class="step"><b>Step 2｜拍攝</b>拍攝農產品、農場環境與人物照片。</div>
+      <div class="step"><b>Step 3｜生成</b>使用本系統產生 AI 創作指令。</div>
+      <div class="step"><b>Step 4｜修正</b>學生依真實內容修改 AI 產出。</div>
+      <div class="step"><b>Step 5｜發表</b>完成 Vocus、IG、Threads、FB 或短影音內容。</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-title">
+      <h2>二、AI農業品牌指令產生器</h2>
+      <p>填入基本資料後，可產生一份完整的農產品品牌創作 Prompt。</p>
+    </div>
+
+    <div class="form-box">
+      <div class="grid">
+        <div>
+          <label>農場／品牌名稱</label>
+          <input id="farmName" placeholder="例如：南境紅豆農場">
+        </div>
+
+        <div>
+          <label>農產品</label>
+          <input id="productName" placeholder="例如：紅豆、蓮霧、芒果、咖啡">
+        </div>
+
+        <div>
+          <label>品牌風格</label>
+          <select id="brandStyle">
+            <option>溫暖樸實風</option>
+            <option>青農創業風</option>
+            <option>文青故事風</option>
+            <option>高級精品風</option>
+            <option>可愛活潑風</option>
+            <option>地方創生風</option>
+          </select>
+        </div>
+
+        <div>
+          <label>發布平台</label>
+          <select id="platform">
+            <option>Vocus農業故事文章</option>
+            <option>IG貼文</option>
+            <option>Threads貼文</option>
+            <option>Facebook貼文</option>
+            <option>短影音腳本</option>
+          </select>
+        </div>
+      </div>
+
+      <label>農民／農場故事重點</label>
+      <textarea id="storyPoint" placeholder="例如：家裡三代種紅豆，堅持友善栽培，每年冬天是最忙碌也最期待的季節。"></textarea>
+
+      <label>想強調的特色</label>
+      <textarea id="featurePoint" placeholder="例如：產地直送、顆粒飽滿、口感綿密、適合煮紅豆湯與甜點。"></textarea>
+
+      <button class="btn" onclick="generatePrompt()">產生完整 Prompt</button>
+      <button class="btn secondary" onclick="copyGeneratedPrompt()">複製產生結果</button>
+
+      <pre id="generatedPrompt">請先填寫上方資料，再按下「產生完整 Prompt」。</pre>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-title">
+      <h2>三、常用 AI 創作 Prompt 工具箱</h2>
+      <p>學生可直接複製以下指令，貼到 ChatGPT 使用。</p>
+    </div>
+
+    <div class="prompt-card">
+      <span class="tag">品牌定位</span>
+      <h3>品牌名稱與品牌精神</h3>
+      <pre id="p1">請你扮演「農產品品牌顧問」。請根據我提供的農產品、產地、農民故事與特色，幫我設計：
+1. 品牌名稱 5 組
+2. 品牌標語 5 組
+3. 品牌精神
+4. 適合的品牌風格
+5. 適合放在網站首頁的一句話
+
+請使用溫暖、真實、有土地感的語氣，不要過度商業化。</pre>
+      <button class="btn secondary" onclick="copyText('p1')">複製 Prompt</button>
+    </div>
+
+    <div class="prompt-card">
+      <span class="tag">Vocus文章</span>
+      <h3>農業品牌故事文章</h3>
+      <pre id="p2">請你扮演「農業故事寫作者」。請根據我提供的農民訪談內容、農產品特色與產地背景，撰寫一篇適合發布在 Vocus 的農業品牌故事文章。
+
+文章請包含：
+1. 吸引人的標題
+2. 140字內開場摘要
+3. 農民或家庭故事
+4. 農產品特色
+5. 種植過程或堅持
+6. 結尾呼籲：讓更多人看見在地農業
+
+請注意：本文章僅作教育推廣與品牌故事介紹，不涉及金錢交易、訂單或販售承諾。</pre>
+      <button class="btn secondary" onclick="copyText('p2')">複製 Prompt</button>
+    </div>
+
+    <div class="prompt-card">
+      <span class="tag">IG</span>
+      <h3>IG 農產品貼文</h3>
+      <pre id="p3">請你扮演「農產品社群行銷小編」。請根據我提供的農產品與農場故事，寫一篇適合 IG 發布的貼文。
+
+需求：
+1. 開頭要吸引人
+2. 語氣自然、可愛、有溫度
+3. 強調農產品特色與農民故事
+4. 加入適合的 Emoji
+5. 提供 10 組 Hashtag
+6. 結尾請引導讀者閱讀完整農業故事
+
+請避免誇大療效，不要寫成直接販售文。</pre>
+      <button class="btn secondary" onclick="copyText('p3')">複製 Prompt</button>
+    </div>
+
+    <div class="prompt-card">
+      <span class="tag">Threads</span>
+      <h3>Threads 農業故事貼文</h3>
+      <pre id="p4">請你扮演「Threads農業故事創作者」。請將我提供的農產品故事，改寫成適合 Threads 發布的短文。
+
+需求：
+1. 第一行要有停下來看的吸引力
+2. 文字不要太長
+3. 有故事感，不要像廣告
+4. 呈現農民的努力與土地感
+5. 結尾留下溫暖、有共鳴的一句話
+
+請產出 3 種版本：
+A. 溫暖感人版
+B. 青農創業版
+C. 可愛活潑版</pre>
+      <button class="btn secondary" onclick="copyText('p4')">複製 Prompt</button>
+    </div>
+
+    <div class="prompt-card">
+      <span class="tag">短影音</span>
+      <h3>Reels／Shorts 影片腳本</h3>
+      <pre id="p5">請你扮演「農產品短影音企劃」。請根據我提供的農產品、農場故事與照片內容，設計一支 30 秒短影音腳本。
+
+請包含：
+1. 前3秒吸引人的開場
+2. 分鏡表
+3. 畫面內容
+4. 字幕文字
+5. 旁白稿
+6. 背景音樂建議
+7. 結尾 CTA：閱讀完整農業故事
+
+風格請自然、有溫度，適合學生拍攝，不要太商業化。</pre>
+      <button class="btn secondary" onclick="copyText('p5')">複製 Prompt</button>
+    </div>
+
+    <div class="prompt-card">
+      <span class="tag">AI圖像</span>
+      <h3>Logo／主視覺圖片 Prompt</h3>
+      <pre id="p6">請你扮演「農產品品牌視覺設計師」。請根據我提供的農產品、品牌名稱、產地特色與品牌風格，幫我產生 AI 圖像生成 Prompt。
+
+請輸出：
+1. Logo設計 Prompt
+2. 農產品主視覺 Prompt
+3. IG貼文封面 Prompt
+4. 品牌色彩建議
+5. 字體風格建議
+
+視覺風格請乾淨、自然、有農業溫度，適合教育推廣與品牌故事展示。</pre>
+      <button class="btn secondary" onclick="copyText('p6')">複製 Prompt</button>
+    </div>
+
+  </section>
+
+</main>
+
+<div class="copy-ok" id="copyOk">✅ 已複製到剪貼簿</div>
+
+<footer class="footer">
+  AI農業創作教學系統｜本系統用於農業教育、AI創作教學與品牌故事推廣。<br>
+  不涉及交易、不代售商品、不處理金流與訂單。
+</footer>
+
+<script>
+  function generatePrompt(){
+    const farmName = document.getElementById("farmName").value || "尚未填寫農場名稱";
+    const productName = document.getElementById("productName").value || "尚未填寫農產品";
+    const brandStyle = document.getElementById("brandStyle").value;
+    const platform = document.getElementById("platform").value;
+    const storyPoint = document.getElementById("storyPoint").value || "尚未填寫故事重點";
+    const featurePoint = document.getElementById("featurePoint").value || "尚未填寫產品特色";
+
+    const prompt = `請你扮演「AI農業品牌創作顧問」。
+
+我要為一個農產品建立品牌故事與行銷內容，請根據以下資料協助我創作。
+
+【農場／品牌名稱】
+${farmName}
+
+【農產品】
+${productName}
+
+【品牌風格】
+${brandStyle}
+
+【發布平台】
+${platform}
+
+【農民／農場故事重點】
+${storyPoint}
+
+【想強調的特色】
+${featurePoint}
+
+請幫我產出以下內容：
+
+1. 品牌定位說明
+2. 一句品牌標語
+3. 適合放在網站上的品牌簡介，約100字
+4. 適合發布在「${platform}」的內容
+5. 若適合，請提供短影音腳本或圖片創作方向
+6. 給學生的修改建議：哪些地方需要再補充真實資料
+
+請注意：
+本內容是農業教育、品牌故事與AI創作練習用途。
+請不要寫成誇大販售文。
+請不要承諾療效。
+請不要涉及金錢交易、訂單、付款或配送。
+語氣請真實、溫暖、有土地感，讓讀者看見農民的努力與農產品的價值。`;
+
+    document.getElementById("generatedPrompt").innerText = prompt;
+  }
+
+  function copyText(id){
+    const text = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(text).then(showCopyOk);
+  }
+
+  function copyGeneratedPrompt(){
+    const text = document.getElementById("generatedPrompt").innerText;
+    navigator.clipboard.writeText(text).then(showCopyOk);
+  }
+
+  function showCopyOk(){
+    const box = document.getElementById("copyOk");
+    box.style.display = "block";
+    setTimeout(() => {
+      box.style.display = "none";
+    }, 1800);
+  }
+</script>
+
+</body>
+</html>
