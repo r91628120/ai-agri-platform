@@ -194,6 +194,38 @@
       .prompt-panel{position:static}
       #promptOutput{max-height:none}
     }
+
+     @media(max-width:640px){
+  .navbar{
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+    padding:12px 10px;
+  }
+
+  .nav-logo{
+    font-size:1rem;
+    text-align:center;
+    line-height:1.4;
+    white-space:nowrap;
+  }
+
+  .nav-links{
+    width:100%;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:nowrap;
+  }
+
+  .nav-links a{
+    font-size:.92rem;
+    padding:6px 8px;
+    border-radius:999px;
+    background:#f0f6f1;
+    white-space:nowrap;
+  }
+ }
+
   </style>
 </head>
 <body>
