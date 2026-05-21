@@ -311,7 +311,7 @@
 
 <header>
   <h1>學生農民採訪 Prompt 產生器</h1>
-  <p>學生依照 A 到 I 九大主題填入採訪資料，系統會自動產生可丟給 AI 的完整 Prompt，協助轉成部落格文章、社群貼文、採訪紀錄或產品銷售頁。</p>
+  <p>學生依照 A 到 J 九大主題填入採訪資料，系統會自動產生可丟給 AI 的完整 Prompt，協助轉成部落格文章、社群貼文、採訪紀錄或產品銷售頁。</p>
 </header>
 
 <main class="wrap">
@@ -461,6 +461,19 @@ const sections = [
       ["logo","是否可放 Logo 與網站連結","例如：可以放品牌Logo、FB連結、訂購表單"],
       ["promotionGoal","希望平台協助什麼","例如：增加曝光、找新客戶、讓年輕人認識農業"]
     ]
+  },
+  {
+  title:"J. 自由補充與學生靈感",
+  description:"學生可自由補充採訪中的小故事、觀察、靈感與想法，增加文章溫度與創作豐富度。",
+  fields:[
+    ["studentObservation","學生觀察與心得","例如：農民講到颱風損失時一度哽咽，讓人感受到農業的不容易"],
+    
+    ["specialStory","特殊故事或在地文化","例如：這片土地是阿公留下來的，農民希望繼續傳承下去"],
+    
+    ["creativeIdea","學生創意與延伸想法","例如：可以發展採果體驗、短影音企劃、地方品牌合作"],
+    
+    ["extraNotes","其他補充內容","可自由填寫任何想加入文章的內容"]
+  ]
   }
 ];
 
@@ -475,12 +488,20 @@ function init(){
     let html = `<h2>${section.title}</h2><p class="desc">${section.description}</p><div class="grid">`;
     section.fields.forEach(([key,label,placeholder])=>{
       form[key] = "";
-      html += `
-        <div>
-          <label for="${key}">${label}</label>
-          <input id="${key}" placeholder="${placeholder}" oninput="updateField('${key}', this.value)">
-        </div>`;
-    });
+      const isLong =
+          section.title.includes("J.");
+
+        html += `
+            <div style="${isLong ? 'grid-column:1/-1' : ''}">
+            <label for="${key}">${label}</label>
+
+        ${
+            isLong
+              ? `<textarea id="${key}" placeholder="${placeholder}" oninput="updateField('${key}', this.value)"></textarea>`
+              : `<input id="${key}" placeholder="${placeholder}" oninput="updateField('${key}', this.value)">`
+          }
+            </div>`;
+      });
     html += `</div>`;
     card.innerHTML = html;
     formArea.appendChild(card);
