@@ -234,7 +234,38 @@
   .nav-links a:hover{
     color:#2f7d4b;
   }
+   
+   @media(max-width:640px){
+  .navbar{
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+    padding:12px 10px;
+  }
 
+  .nav-logo{
+    font-size:1rem;
+    text-align:center;
+    line-height:1.4;
+    white-space:nowrap;
+  }
+
+  .nav-links{
+    width:100%;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:nowrap;
+  }
+
+  .nav-links a{
+    font-size:.92rem;
+    padding:6px 8px;
+    border-radius:999px;
+    background:#f0f6f1;
+    white-space:nowrap;
+  }
+ }
+    
   </style>
 </head>
 
@@ -278,6 +309,15 @@
       <div class="step"><b>Step 3｜生成</b>使用本系統產生 AI 創作指令。</div>
       <div class="step"><b>Step 4｜修正</b>學生依真實內容修改 AI 產出。</div>
       <div class="step"><b>Step 5｜發表</b>完成 Vocus、IG、Threads、FB 或短影音內容。</div>
+      <div class="step">
+             <b>Step 6｜農民訪談系統</b>
+                學生填寫農民採訪資料，自動生成 AI Prompt 與品牌故事。
+             <br><br>
+
+            <a href="../interview/" class="btn">
+                進入訪談系統
+            </a>
+      </div>
     </div>
   </section>
 
