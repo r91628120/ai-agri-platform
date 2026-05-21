@@ -1,1 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <title>AI青農品牌故事平台</title>
+  <meta name="description" content="AI青農品牌故事平台，透過學生採訪、AI創作與圖文故事，讓更多人看見在地農業、農民努力與農產品價值。" />
+
+  <style>
+    :root{
+      --green:#2f7d4b;
+      --deep:#183b28;
+      --light:#f4faf5;
+      --soft:#e7f3ea;
+      --card:#ffffff;
+      --text:#243528;
+      --muted:#5f7567;
+      --line:#d7eadc;
+      --yellow:#fff8df;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:"Noto Sans TC","Microsoft JhengHei",Arial,sans-serif;
+      background:#f8fbf8;
+      color:var(--text);
+      line-height:1.75;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    header{
+      background:
+        linear-gradient(rgba(24,59,40,.78),rgba(24,59,40,.78)),
+        url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80");
+      background-size:cover;
+      background-position:center;
+      color:white;
+      text-align:center;
+      padding:72px 20px 64px;
+    }
+
+    header .tag{
+      display:inline-block;
+      background:rgba(255,255,255,.16);
+      border:1px solid rgba(255,255,255,.35);
+      padding:6px 14px;
+      border-radius:999px;
+      font-size:.9rem;
+      margin-bottom:18px;
+    }
+
+    header h1{
+      margin:0;
+      font-size:2.35rem;
+      letter-spacing:1px;
+    }
+
+    header p{
+      max-width:760px;
+      margin:16px auto 0;
+      font-size:1.08rem;
+      opacity:.96;
+    }
+
+    .wrap{
+      max-width:1120px;
+      margin:auto;
+      padding:34px 18px 64px;
+    }
+
+    .notice{
+      background:var(--yellow);
+      border:1px solid #f0d98a;
+      border-radius:18px;
+      padding:18px 20px;
+      margin-bottom:28px;
+    }
+
+    .section-title{
+      text-align:center;
+      margin:34px 0 22px;
+    }
+
+    .section-title h2{
+      margin:0 0 8px;
+      color:var(--deep);
+      font-size:1.65rem;
+    }
+
+    .section-title p{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .intro-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+      gap:18px;
+      margin-top:22px;
+    }
+
+    .intro-card{
+      background:white;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:22px;
+      box-shadow:0 4px 14px rgba(0,0,0,.04);
+    }
+
+    .intro-card b{
+      display:block;
+      color:var(--green);
+      margin-bottom:8px;
+      font-size:1.05rem;
+    }
+
+    .story-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:20px;
+      margin-top:22px;
+    }
+
+    .story-card{
+      background:white;
+      border:1px solid var(--line);
+      border-radius:22px;
+      overflow:hidden;
+      box-shadow:0 5px 18px rgba(0,0,0,.055);
+      display:flex;
+      flex-direction:column;
+    }
+
+    .story-card img{
+      width:100%;
+      height:190px;
+      object-fit:cover;
+      background:#eaf3eb;
+    }
+
+    .story-body{
+      padding:20px;
+      flex:1;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .badge{
+      display:inline-block;
+      width:max-content;
+      background:#e9f6ec;
+      color:var(--green);
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:.82rem;
+      margin-bottom:10px;
+      font-weight:700;
+    }
+
+    .story-card h3{
+      margin:0 0 8px;
+      color:var(--deep);
+      font-size:1.25rem;
+    }
+
+    .story-card p{
+      margin:0 0 16px;
+      color:#405744;
+      flex:1;
+    }
+
+    .btn{
+      display:inline-block;
+      background:var(--green);
+      color:white;
+      padding:10px 16px;
+      border-radius:999px;
+      font-weight:700;
+      text-align:center;
+      margin-top:auto;
+    }
+
+    .btn:hover{
+      background:#25663d;
+    }
+
+    .btn.light{
+      background:#eef7f1;
+      color:var(--green);
+      border:1px solid #cfe1d4;
+    }
+
+    .cta{
+      background:linear-gradient(135deg,#eaf7ed,#ffffff);
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:28px;
+      margin-top:34px;
+      text-align:center;
+    }
+
+    .cta h2{
+      color:var(--deep);
+      margin-top:0;
+    }
+
+    .footer{
+      background:#eaf5ed;
+      color:#46634f;
+      text-align:center;
+      padding:30px 20px;
+      font-size:.92rem;
+    }
+
+    @media(max-width:640px){
+      header{
+        padding:56px 18px 48px;
+      }
+
+      header h1{
+        font-size:1.85rem;
+      }
+
+      .wrap{
+        padding:26px 14px 54px;
+      }
+
+      .story-card img{
+        height:180px;
+      }
+    }
+     
+    .navbar{
+      position:sticky;
+      top:0;
+      z-index:999;
+      background:white;
+      border-bottom:1px solid #d7eadc;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:14px 24px;
+      box-shadow:0 2px 10px rgba(0,0,0,.04);
+    }
+
+    .nav-logo{
+      font-weight:800;
+      color:#2f7d4b;
+      font-size:1.05rem;
+    }
+
+   .nav-links{
+      display:flex;
+      gap:18px;
+   }
+
+   .nav-links a{
+     color:#294b35;
+     font-weight:700;
+   }
+
+   .nav-links a:hover{
+     color:#2f7d4b;
+   } 
+
+    @media(max-width:640px){
+  .navbar{
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+    padding:12px 10px;
+  }
+
+  .nav-logo{
+    font-size:1rem;
+    text-align:center;
+    line-height:1.4;
+    white-space:nowrap;
+  }
+
+  .nav-links{
+    width:100%;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:nowrap;
+  }
+
+  .nav-links a{
+    font-size:.92rem;
+    padding:6px 8px;
+    border-radius:999px;
+    background:#f0f6f1;
+    white-space:nowrap;
+  }
+ }
+
+  </style>
+</head>
+
+<body>
+
+   <nav class="navbar">
+      <div class="nav-logo">
+       🌱 AI農業教育平台
+     </div>
+
+     <div class="nav-links">
+        <a href="../index.html">首頁</a>
+        <a href="../teaching/">教學系統</a>
+        <a href="./">品牌故事</a>
+      </div>
+   </nav>
+
+
+
+<header>
+  <div class="tag">AI × 青農 × 品牌故事</div>
+  <h1>AI青農品牌故事平台</h1>
+  <p>
+    讓學生透過採訪、攝影、AI創作與圖文整理，協助更多在地農民與農產品被看見。
+    這裡不是商城，而是一個農業故事與品牌教育展示平台。
+  </p>
+</header>
+
+<main class="wrap">
+
+  <div class="notice">
+    <strong>平台聲明：</strong><br>
+    本平台為農業教育、AI創作教學與品牌故事推廣用途，不進行商品販售、不接觸金錢交易、不代收訂單、不處理配送。
+    若讀者對農產品有興趣，請自行依文章中公開資訊與農民或農場聯繫。
+  </div>
+
+  <section>
+    <div class="section-title">
+      <h2>我們在做什麼？</h2>
+      <p>用 AI 與學生創作，重新看見農業的價值。</p>
+    </div>
+
+    <div class="intro-grid">
+      <div class="intro-card">
+        <b>🌱 學生採訪</b>
+        學生走進農場，訪問農民、記錄故事，學習從土地與人的角度理解農業。
+      </div>
+
+      <div class="intro-card">
+        <b>📸 圖文紀錄</b>
+        透過照片、短文與故事整理，讓農產品不只是產品，而是有溫度的地方故事。
+      </div>
+
+      <div class="intro-card">
+        <b>🤖 AI協作</b>
+        使用 AI 協助整理品牌故事、社群文案、短影音腳本與視覺創作方向。
+      </div>
+
+      <div class="intro-card">
+        <b>🌾 品牌展示</b>
+        將學生完成的農業品牌故事整理成對外展示頁面，協助更多人認識在地農業。
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-title">
+      <h2>青農品牌故事</h2>
+      <p>以下為示範卡片，之後可替換成學生與農民的真實故事。</p>
+    </div>
+
+    <div class="story-grid">
+
+      <article class="story-card">
+        <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=900&q=80" alt="紅豆品牌故事">
+        <div class="story-body">
+          <span class="badge">屏東紅豆</span>
+          <h3>南境紅豆｜把冬天的等待煮成一碗甜</h3>
+          <p>
+            從播種到採收，每一顆紅豆都藏著農民與土地的默契。學生用採訪與AI整理，記錄這份南方農業的溫度。
+          </p>
+          <a class="btn" href="#" target="_blank">閱讀故事</a>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <img src="https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?auto=format&fit=crop&w=900&q=80" alt="芒果品牌故事">
+        <div class="story-body">
+          <span class="badge">夏季芒果</span>
+          <h3>陽光果園｜一顆芒果的夏日練習</h3>
+          <p>
+            芒果不只是水果，也是農民與氣候、時間、技術共同完成的作品。學生嘗試用品牌語言說出產地故事。
+          </p>
+          <a class="btn" href="#" target="_blank">閱讀故事</a>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <img src="https://images.unsplash.com/photo-1511537190424-bbbab87ac5eb?auto=format&fit=crop&w=900&q=80" alt="咖啡品牌故事">
+        <div class="story-body">
+          <span class="badge">在地咖啡</span>
+          <h3>山丘咖啡｜從一棵樹開始的香氣</h3>
+          <p>
+            從栽培、採收、處理到杯中風味，咖啡是一段漫長的農業旅程。這是學生學習農業品牌敘事的開始。
+          </p>
+          <a class="btn" href="#" target="_blank">閱讀故事</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>讓農業故事被更多人看見</h2>
+    <p>
+      本平台歡迎學生以採訪、照片、AI創作與文字整理方式，記錄家鄉農業、家庭農場與在地農民故事。
+    </p>
+    <a class="btn light" href="../teaching/">進入 AI農業創作教學系統</a>
+  </section>
+
+</main>
+
+<footer class="footer">
+  AI青農品牌故事平台｜農業教育・AI創作・品牌故事推廣<br>
+  本平台不販售商品、不代收款項、不處理訂單與配送。
+</footer>
+
+</body>
+</html>
