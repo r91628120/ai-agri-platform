@@ -1,1 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>學生農民採訪 Prompt 產生器</title>
+  <style>
+    :root{
+      --green:#2f7d4b;
+      --green2:#7abf73;
+      --light:#f3faf5;
+      --dark:#1f3d2b;
+      --card:#ffffff;
+      --line:#d9eadf;
+      --muted:#65766a;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Noto Sans TC","Microsoft JhengHei",Arial,sans-serif;
+      background:#f7faf7;
+      color:#243528;
+      line-height:1.7;
+    }
+    .navbar{
+      position:sticky;
+      top:0;
+      z-index:999;
+      background:white;
+      border-bottom:1px solid #d7eadc;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:14px 24px;
+      box-shadow:0 2px 10px rgba(0,0,0,.04);
+    }
+    .nav-logo{font-weight:800;color:var(--green)}
+    .nav-links{display:flex;gap:18px}
+    .nav-links a{color:#294b35;font-weight:700;text-decoration:none}
+    .nav-links a:hover{color:var(--green)}
+    header{
+      background:linear-gradient(135deg,var(--green),var(--green2));
+      color:white;
+      padding:52px 20px;
+      text-align:center;
+    }
+    header h1{margin:0;font-size:2.1rem;letter-spacing:1px}
+    header p{max-width:860px;margin:14px auto 0;font-size:1.05rem}
+    .wrap{max-width:1280px;margin:auto;padding:28px 18px 60px}
+    .notice{
+      background:#fff8df;
+      border:1px solid #f0d98a;
+      border-radius:16px;
+      padding:18px 20px;
+      margin:20px 0 28px;
+    }
+    .layout{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 420px;
+      gap:24px;
+      align-items:start;
+    }
+    .form-area{display:grid;gap:16px}
+    .card{
+      background:white;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:20px;
+      box-shadow:0 4px 14px rgba(0,0,0,.04);
+    }
+    .card h2{
+      margin:0 0 4px;
+      color:var(--dark);
+      font-size:1.25rem;
+    }
+    .desc{margin:0 0 14px;color:var(--muted);font-size:.95rem}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+      gap:14px;
+    }
+    label{
+      display:block;
+      font-weight:700;
+      color:#294b35;
+      margin-bottom:6px;
+      font-size:.95rem;
+    }
+    input, textarea{
+      width:100%;
+      padding:11px 13px;
+      border:1px solid #cfe1d4;
+      border-radius:12px;
+      font-size:1rem;
+      font-family:inherit;
+      background:white;
+    }
+    textarea{
+      min-height:80px;
+      resize:vertical;
+    }
+    .prompt-panel{
+      position:sticky;
+      top:82px;
+      background:white;
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:20px;
+      box-shadow:0 4px 16px rgba(0,0,0,.06);
+    }
+    .prompt-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-bottom:14px;
+    }
+    .prompt-top h2{margin:0;color:var(--dark)}
+    .mode-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:8px;
+      margin-bottom:12px;
+    }
+    button{
+      border:none;
+      background:var(--green);
+      color:white;
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:.95rem;
+      cursor:pointer;
+      font-weight:800;
+      font-family:inherit;
+    }
+    button:hover{background:#25663d}
+    button.secondary{
+      background:#f0f6f1;
+      color:var(--green);
+      border:1px solid #cfe1d4;
+    }
+    button.secondary.active{
+      background:var(--green);
+      color:white;
+      border-color:var(--green);
+    }
+    #promptOutput{
+      white-space:pre-wrap;
+      word-break:break-word;
+      background:#f6fbf7;
+      border:1px dashed #b9d7c1;
+      padding:14px;
+      border-radius:14px;
+      min-height:560px;
+      max-height:70vh;
+      overflow:auto;
+      font-size:.92rem;
+    }
+    .progress{
+      margin:10px 0 14px;
+      background:#eef6f0;
+      border-radius:999px;
+      overflow:hidden;
+      height:10px;
+    }
+    #progressBar{
+      height:10px;
+      width:0%;
+      background:var(--green);
+    }
+    .small{color:var(--muted);font-size:.9rem}
+    .copy-ok{
+      position:fixed;
+      left:50%;
+      bottom:28px;
+      transform:translateX(-50%);
+      background:#243528;
+      color:white;
+      padding:12px 18px;
+      border-radius:999px;
+      display:none;
+      z-index:99;
+      box-shadow:0 6px 18px rgba(0,0,0,.25);
+    }
+    footer{
+      text-align:center;
+      padding:30px 20px;
+      background:#eaf5ed;
+      color:#46634f;
+      font-size:.9rem;
+    }
+    @media(max-width:980px){
+      .layout{grid-template-columns:1fr}
+      .prompt-panel{position:static}
+      #promptOutput{max-height:none}
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-logo">🌱 AI農業教育平台</div>
+  <div class="nav-links">
+    <a href="../index.html">首頁</a>
+    <a href="../teaching/">教學系統</a>
+    <a href="../stories/">品牌故事</a>
+  </div>
+</nav>
 
+<header>
+  <h1>學生農民採訪 Prompt 產生器</h1>
+  <p>學生依照 A 到 I 九大主題填入採訪資料，系統會自動產生可丟給 AI 的完整 Prompt，協助轉成部落格文章、社群貼文、採訪紀錄或產品銷售頁。</p>
+</header>
+
+<main class="wrap">
+  <div class="notice">
+    <strong>使用方式：</strong>學生採訪農民後，將資料填入下方欄位。右側會即時產生 Prompt，可複製到 ChatGPT 使用。若資料不足，AI 會協助列出需要補問的問題。
+  </div>
+
+  <div class="layout">
+    <div class="form-area" id="formArea"></div>
+
+    <aside class="prompt-panel">
+      <div class="prompt-top">
+        <div>
+          <h2>AI Prompt</h2>
+          <div class="small">完成度：<span id="countText">0/0</span></div>
+        </div>
+        <button onclick="copyPrompt()">複製</button>
+      </div>
+      <div class="progress"><div id="progressBar"></div></div>
+      <div class="mode-grid">
+        <button class="secondary active" data-mode="blog" onclick="setMode('blog')">部落格</button>
+        <button class="secondary" data-mode="social" onclick="setMode('social')">社群貼文</button>
+        <button class="secondary" data-mode="interview" onclick="setMode('interview')">採訪紀錄</button>
+        <button class="secondary" data-mode="product" onclick="setMode('product')">銷售頁</button>
+      </div>
+      <pre id="promptOutput"></pre>
+    </aside>
+  </div>
+</main>
+
+<div class="copy-ok" id="copyOk">✅ 已複製到剪貼簿</div>
+
+<footer>
+  AI農業教育平台｜本頁用於農業教育、AI創作教學與品牌故事推廣。
+</footer>
+
+<script>
+const sections = [
+  {
+    title:"A. 農民基本資料",
+    description:"了解農民背景與從農故事。",
+    fields:[
+      ["farmerName","農民姓名／稱呼","例如：王大哥、陳阿姨"],
+      ["brandName","農場／品牌名稱","例如：阿山有機果園"],
+      ["age","年齡","例如：52歲"],
+      ["farmingYears","從農年資","例如：種植芒果已經20年"],
+      ["whyFarm","為什麼投入農業","例如：家族傳承、返鄉創業、喜歡土地"]
+    ]
+  },
+  {
+    title:"B. 農地與種植資訊",
+    description:"整理農地規模、作物與栽培方式。",
+    fields:[
+      ["crop","主要農作物","例如：鳳梨、芒果、茶葉、稻米"],
+      ["landSize","農地大小","例如：3甲、500坪、2公頃"],
+      ["location","農地位置／地區特色","例如：台南玉井、屏東高樹"],
+      ["plantingMethod","種植方式","例如：露天、溫室、有機、友善耕作"],
+      ["pesticide","是否使用農藥或肥料","例如：不噴農藥、少量用藥、使用天然肥料"]
+    ]
+  },
+  {
+    title:"C. 人力與工作內容",
+    description:"了解農民一天怎麼工作、是否有聘工。",
+    fields:[
+      ["team","一人作業或多人合作","例如：夫妻一起做、旺季聘請臨時工"],
+      ["dailyWork","每日工作內容","例如：巡田、澆水、除草、採收、包裝"],
+      ["busySeason","最忙的季節或工作","例如：採收期最忙，常常清晨開始工作"],
+      ["hardestWork","最辛苦的地方","例如：天氣熱、人工不足、價格不穩"]
+    ]
+  },
+  {
+    title:"D. 農產品介紹（非常重要）",
+    description:"讓消費者知道產品特色、如何挑選、保存與食用。",
+    fields:[
+      ["productFeature","農產品特色","例如：甜度高、香氣濃、口感細緻"],
+      ["maturity","如何判斷成熟／新鮮","例如：顏色、香氣、硬度、果蒂狀態"],
+      ["harvestSeason","採收期／生產期","例如：每年5到7月採收"],
+      ["storage","保存方式與可放多久","例如：常溫3天、冷藏約一週"],
+      ["bestTimeToEat","什麼時候最好吃","例如：收到後放1到2天風味最佳"],
+      ["howToEat","推薦吃法／料理方式","例如：直接吃、打果汁、做成果醬"]
+    ]
+  },
+  {
+    title:"E. 銷售與市場",
+    description:"了解目前銷售管道與消費者如何購買。",
+    fields:[
+      ["salesChannel","目前銷售方式","例如：批發、農會、市集、熟客訂購"],
+      ["price","價格資訊","例如：一斤80元、禮盒600元"],
+      ["income","平均年收入或收入狀況","可填大概區間；若農民不願回答，可寫不方便公開"],
+      ["contact","聯絡方式","例如：LINE、電話、FB粉專、網站"],
+      ["howToBuy","如何購買","例如：宅配、現場購買、平台下單"]
+    ]
+  },
+  {
+    title:"F. 科技與 AI 議題",
+    description:"討論無人機、AI、電商與未來行銷。",
+    fields:[
+      ["drone","對無人機噴灑農藥的看法","例如：節省人力，但擔心成本或技術門檻"],
+      ["aiView","對 AI 加入農業的期待","例如：協助病蟲害判斷、行銷文案、價格分析"],
+      ["ecommerce","是否想嘗試電商或網路行銷","例如：想做但不知道從哪裡開始"],
+      ["learningNeed","希望學習哪些工具","例如：AI文案、短影音、直播、社群經營"]
+    ]
+  },
+  {
+    title:"G. 農業困境與人生故事",
+    description:"挖掘農民面對挑戰時的真實故事。",
+    fields:[
+      ["disaster","遇過的天災或損失","例如：颱風、豪雨、寒害、病蟲害"],
+      ["challenge","目前最大的困難","例如：缺工、價格波動、氣候變遷"],
+      ["turningPoint","最難忘的經驗","例如：第一次外銷、作物全毀後重新開始"],
+      ["proud","最有成就感的事情","例如：客人回購、孩子願意理解農業"]
+    ]
+  },
+  {
+    title:"H. 對未來與年輕人的期待",
+    description:"讓農民談願景、傳承與想對學生說的話。",
+    fields:[
+      ["youngFarmers","是否希望更多年輕農民加入","例如：希望年輕人帶來新技術與新行銷"],
+      ["future","對未來農業的期待","例如：更智慧化、更重視品牌、更友善土地"],
+      ["messageToStudents","想對學生或消費者說的話","例如：希望大家珍惜食物、理解農民辛苦"]
+    ]
+  },
+  {
+    title:"I. 平台合作與推廣",
+    description:"確認農民是否願意加入平台曝光與合作。",
+    fields:[
+      ["joinPlatform","是否願意加入平台","例如：願意／想了解／暫時不考慮"],
+      ["logo","是否可放 Logo 與網站連結","例如：可以放品牌Logo、FB連結、訂購表單"],
+      ["promotionGoal","希望平台協助什麼","例如：增加曝光、找新客戶、讓年輕人認識農業"]
+    ]
+  }
+];
+
+let mode = "blog";
+const form = {};
+
+function init(){
+  const formArea = document.getElementById("formArea");
+  sections.forEach(section=>{
+    const card = document.createElement("section");
+    card.className = "card";
+    let html = `<h2>${section.title}</h2><p class="desc">${section.description}</p><div class="grid">`;
+    section.fields.forEach(([key,label,placeholder])=>{
+      form[key] = "";
+      html += `
+        <div>
+          <label for="${key}">${label}</label>
+          <input id="${key}" placeholder="${placeholder}" oninput="updateField('${key}', this.value)">
+        </div>`;
+    });
+    html += `</div>`;
+    card.innerHTML = html;
+    formArea.appendChild(card);
+  });
+  updatePrompt();
+}
+
+function updateField(key,value){
+  form[key] = value;
+  updatePrompt();
+}
+
+function setMode(nextMode){
+  mode = nextMode;
+  document.querySelectorAll("[data-mode]").forEach(btn=>{
+    btn.classList.toggle("active", btn.dataset.mode === mode);
+  });
+  updatePrompt();
+}
+
+function modeText(){
+  const text = {
+    blog:"請根據以下學生採訪農民的資料，整理成一篇有溫度、有故事性、適合放在網站或部落格的農民專訪文章。文章要包含標題、前言、農民故事、農產品特色、購買資訊、科技與未來展望，語氣真誠、清楚、能幫助農產品行銷。",
+    social:"請根據以下資料，產生 3 則社群貼文。每則貼文要有吸引人的開頭、農產品特色、農民故事、購買方式與行動呼籲，適合 Facebook 或 Instagram。",
+    interview:"請根據以下資料，協助學生整理成一份正式採訪紀錄。內容要分段清楚，保留農民口吻，並整理出可以延伸追問的問題。",
+    product:"請根據以下資料，整理成農產品銷售頁文案。內容要包含產品特色、產地故事、保存方式、最佳食用時機、購買方式與推薦理由。"
+  };
+  return text[mode];
+}
+
+function buildPrompt(){
+  const lines = sections.map(section=>{
+    const fieldLines = section.fields.map(([key,label])=>{
+      return `- ${label}：${form[key] || "尚未填寫"}`;
+    }).join("\n");
+    return `## ${section.title}\n${fieldLines}`;
+  }).join("\n\n");
+
+  return `${modeText()}
+
+請注意：
+1. 不要捏造未提供的資料。
+2. 如果資料不足，請列出建議補問的問題。
+3. 若涉及收入、農藥、價格等敏感內容，請用尊重且中性的方式呈現。
+4. 文章要能幫助消費者理解農民的努力與產品價值。
+5. 本內容僅作教育推廣與品牌故事展示，不涉及金流、訂單或代售。
+
+以下是採訪資料：
+
+${lines}`;
+}
+
+function updatePrompt(){
+  const values = Object.values(form);
+  const filled = values.filter(v=>v.trim()).length;
+  const total = values.length;
+  document.getElementById("countText").innerText = `${filled}/${total}`;
+  document.getElementById("progressBar").style.width = total ? `${filled/total*100}%` : "0%";
+  document.getElementById("promptOutput").innerText = buildPrompt();
+}
+
+function copyPrompt(){
+  const text = document.getElementById("promptOutput").innerText;
+  navigator.clipboard.writeText(text).then(showCopyOk);
+}
+
+function showCopyOk(){
+  const box = document.getElementById("copyOk");
+  box.style.display = "block";
+  setTimeout(()=>{ box.style.display = "none"; }, 1800);
+}
+
+init();
+</script>
+</body>
+</html>
