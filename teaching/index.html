@@ -25,22 +25,24 @@
     }
 
     header{
-      background:linear-gradient(135deg,#2f7d4b,#7abf73);
-      color:white;
-      padding:56px 20px;
-      text-align:center;
+         background:
+      linear-gradient(rgba(15,35,20,.55),rgba(15,35,20,.55)),
+      url("../assets/agri-ai.png");
+
+         background-size:cover;
+         background-position:center;
+
+        color:white;
+        padding:100px 20px;
+        text-align:center;
     }
 
     header h1{
-      margin:0;
-      font-size:2.2rem;
-      letter-spacing:1px;
+      text-shadow:0 4px 18px rgba(0,0,0,.35);
     }
 
     header p{
-      margin:14px auto 0;
-      max-width:760px;
-      font-size:1.05rem;
+      text-shadow:0 2px 10px rgba(0,0,0,.35);
     }
 
     .wrap{
@@ -266,6 +268,46 @@
   }
  }
     
+   .ai-helper-box{
+     background:linear-gradient(135deg,#1f5f3b,#3f9b61);
+     color:white;
+     border-radius:24px;
+     padding:36px 30px;
+     margin:28px 0;
+     text-align:center;
+     box-shadow:0 10px 30px rgba(0,0,0,.12);
+   }
+
+   .ai-helper-box h3{
+     margin-top:0;
+     font-size:2rem;
+   }
+
+   .ai-helper-box p{
+     max-width:760px;
+     margin:14px auto 24px;
+     line-height:1.8;
+     font-size:1.05rem;
+   }
+
+   .ai-helper-btn{
+     display:inline-block;
+     background:white;
+     color:#1f5f3b;
+     padding:16px 32px;
+     border-radius:999px;
+     font-size:1.1rem;
+     font-weight:800;
+     text-decoration:none;
+     transition:.25s;
+    }
+
+    .ai-helper-btn:hover{
+     transform:translateY(-2px);
+     background:#f2fff6;
+    }
+
+
   </style>
 </head>
 
@@ -324,7 +366,26 @@
   <section>
     <div class="section-title">
       <h2>二、AI農業品牌指令產生器</h2>
-      <p>填入基本資料後，可產生一份完整的農產品品牌創作 Prompt。</p>
+
+        <p>填入基本資料後，可產生一份完整的農產品品牌創作 Prompt。</p>
+
+    <div class="ai-helper-box">
+       <h3>🤖 AI農業創作助理</h3>
+
+     <p>
+        可直接開啟 AI農業創作助理，
+        協助學生生成品牌故事、社群文案、
+        採訪整理、短影音腳本與圖片 Prompt。
+     </p>
+
+     <a
+        href="https://chatgpt.com/g/g-6a0736d3ab2c8191bf458f913e1c4340-ainong-ye-chuang-zuo-zhu-li"
+        target="_blank"
+        class="ai-helper-btn"
+     >
+        開啟 AI農業創作助理
+      </a>
+     </div>
     </div>
 
     <div class="form-box">
