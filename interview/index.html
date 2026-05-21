@@ -39,10 +39,16 @@
     .nav-links a{color:#294b35;font-weight:700;text-decoration:none}
     .nav-links a:hover{color:var(--green)}
     header{
-      background:linear-gradient(135deg,var(--green),var(--green2));
-      color:white;
-      padding:52px 20px;
-      text-align:center;
+        background:
+       linear-gradient(rgba(18,45,28,.65),rgba(18,45,28,.65)),
+       url("https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1800&q=80");
+
+        background-size:cover;
+        background-position:center;
+
+        color:white;
+        padding:90px 20px;
+        text-align:center;
     }
     header h1{margin:0;font-size:2.1rem;letter-spacing:1px}
     header p{max-width:860px;margin:14px auto 0;font-size:1.05rem}
@@ -225,6 +231,28 @@
     white-space:nowrap;
   }
  }
+   
+  .floating-ai-btn{
+      position:fixed;
+      right:24px;
+      bottom:24px;
+      z-index:9999;
+
+      background:#2f7d4b;
+      color:white;
+
+      padding:16px 22px;
+      border-radius:999px;
+
+      text-decoration:none;
+      font-weight:800;
+
+      box-shadow:0 10px 24px rgba(0,0,0,.18);
+  }
+
+  .floating-ai-btn:hover{
+     background:#25663d;
+  }
 
   </style>
 </head>
@@ -247,6 +275,25 @@
   <div class="notice">
     <strong>使用方式：</strong>學生採訪農民後，將資料填入下方欄位。右側會即時產生 Prompt，可複製到 ChatGPT 使用。若資料不足，AI 會協助列出需要補問的問題。
   </div>
+   
+    <div class="ai-helper-box">
+      <h3>🤖 AI農業創作助理</h3>
+
+      <p>
+        可將學生採訪內容直接貼入 AI農業創作助理，
+        自動生成農民故事、Vocus文章、
+        IG貼文、Threads文案與短影音腳本。
+      </p>
+
+     <a
+        href="https://chatgpt.com/g/g-6a0736d3ab2c8191bf458f913e1c4340-ainong-ye-chuang-zuo-zhu-li"
+        target="_blank"
+        class="ai-helper-btn"
+     >
+        開啟 AI農業創作助理
+     </a>
+   </div>
+
 
   <div class="layout">
     <div class="form-area" id="formArea"></div>
