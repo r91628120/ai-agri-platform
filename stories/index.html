@@ -40,38 +40,290 @@
       text-decoration:none;
     }
 
-    header{
+    .navbar{
+      position:sticky;
+      top:0;
+      z-index:999;
+      background:rgba(255,255,255,.88);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(215,234,220,.85);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:14px 24px;
+      box-shadow:0 8px 30px rgba(24,59,40,.06);
+    }
+
+    .nav-logo{
+      font-weight:900;
+      color:#2f7d4b;
+      font-size:1.05rem;
+      letter-spacing:.02em;
+    }
+
+   .nav-links{
+      display:flex;
+      gap:10px;
+   }
+
+   .nav-links a{
+     color:#294b35;
+     font-weight:800;
+     padding:8px 14px;
+     border-radius:999px;
+   }
+
+   .nav-links a:hover{
+     color:#2f7d4b;
+     background:#eef7f1;
+   }
+
+    header.hero{
+      position:relative;
+      isolation:isolate;
+      overflow:hidden;
+      min-height:680px;
+      color:white;
       background:
-        linear-gradient(rgba(24,59,40,.78),rgba(24,59,40,.78)),
-        url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80");
+        radial-gradient(circle at 18% 18%,rgba(255,247,207,.74),transparent 28%),
+        linear-gradient(90deg,rgba(16,43,29,.82) 0%,rgba(16,43,29,.58) 34%,rgba(16,43,29,.14) 68%,rgba(16,43,29,.28) 100%),
+        url("../assets/images/hero-brand-story.png");
       background-size:cover;
       background-position:center;
-      color:white;
-      text-align:center;
-      padding:72px 20px 64px;
+      padding:92px 20px 78px;
     }
 
-    header .tag{
-      display:inline-block;
-      background:rgba(255,255,255,.16);
-      border:1px solid rgba(255,255,255,.35);
-      padding:6px 14px;
+    header.hero::after{
+      content:"";
+      position:absolute;
+      inset:auto 0 0;
+      height:170px;
+      background:linear-gradient(to bottom,transparent,#f8fbf8 88%);
+      z-index:-1;
+    }
+
+    .hero-inner{
+      width:min(1120px,100%);
+      margin:auto;
+      display:grid;
+      grid-template-columns:minmax(0,1.02fr) minmax(320px,.78fr);
+      gap:34px;
+      align-items:center;
+    }
+
+    .hero-copy{
+      position:relative;
+      max-width:690px;
+      padding:36px 34px;
+      border:1px solid rgba(255,255,255,.26);
+      border-radius:32px;
+      background:linear-gradient(135deg,rgba(255,255,255,.18),rgba(255,255,255,.08));
+      backdrop-filter:blur(16px);
+      box-shadow:0 28px 80px rgba(0,0,0,.22);
+    }
+
+    header.hero .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:rgba(255,255,255,.18);
+      border:1px solid rgba(255,255,255,.34);
+      padding:8px 15px;
       border-radius:999px;
-      font-size:.9rem;
+      font-size:.92rem;
+      font-weight:800;
       margin-bottom:18px;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.18);
     }
 
-    header h1{
+    header.hero h1{
       margin:0;
-      font-size:2.35rem;
-      letter-spacing:1px;
+      max-width:620px;
+      font-size:clamp(2.25rem,5.6vw,4.55rem);
+      line-height:1.08;
+      letter-spacing:-.05em;
+      text-wrap:balance;
     }
 
-    header p{
-      max-width:760px;
-      margin:16px auto 0;
-      font-size:1.08rem;
+    header.hero p{
+      max-width:620px;
+      margin:20px 0 0;
+      font-size:clamp(1rem,2.2vw,1.22rem);
       opacity:.96;
+      text-shadow:0 2px 16px rgba(0,0,0,.18);
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:28px;
+    }
+
+    .hero-actions .btn{
+      margin-top:0;
+      padding:13px 20px;
+      box-shadow:0 12px 26px rgba(47,125,75,.26);
+    }
+
+    .hero-actions .btn.secondary{
+      background:rgba(255,255,255,.92);
+      color:#23653d;
+      border:1px solid rgba(255,255,255,.7);
+    }
+
+    .hero-stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:26px;
+    }
+
+    .stat-pill{
+      background:rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:18px;
+      padding:12px 10px;
+      text-align:center;
+    }
+
+    .stat-pill strong{
+      display:block;
+      font-size:1.25rem;
+      line-height:1.1;
+    }
+
+    .stat-pill span{
+      display:block;
+      margin-top:4px;
+      font-size:.8rem;
+      opacity:.88;
+    }
+
+    .hero-panel{
+      position:relative;
+      justify-self:end;
+      width:min(380px,100%);
+      padding:18px;
+      border-radius:32px;
+      background:rgba(255,255,255,.84);
+      border:1px solid rgba(255,255,255,.68);
+      color:#203b2a;
+      box-shadow:0 28px 70px rgba(0,0,0,.20);
+      backdrop-filter:blur(16px);
+    }
+
+    .panel-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:14px;
+    }
+
+    .panel-title{
+      font-weight:900;
+      color:#183b28;
+    }
+
+    .panel-status{
+      background:#e8f7ed;
+      color:#2f7d4b;
+      border-radius:999px;
+      padding:4px 10px;
+      font-size:.78rem;
+      font-weight:900;
+    }
+
+    .workflow{
+      display:grid;
+      gap:10px;
+    }
+
+    .workflow-item{
+      display:flex;
+      align-items:flex-start;
+      gap:12px;
+      background:#ffffff;
+      border:1px solid #e3efe6;
+      border-radius:20px;
+      padding:14px;
+      box-shadow:0 8px 22px rgba(24,59,40,.06);
+    }
+
+    .workflow-icon{
+      width:36px;
+      height:36px;
+      display:grid;
+      place-items:center;
+      border-radius:14px;
+      background:#edf8f1;
+      color:#2f7d4b;
+      flex:0 0 auto;
+    }
+
+    .workflow-item b{
+      display:block;
+      color:#183b28;
+      line-height:1.35;
+    }
+
+    .workflow-item span{
+      display:block;
+      color:#67806d;
+      font-size:.86rem;
+      line-height:1.55;
+      margin-top:2px;
+    }
+
+    .mini-preview{
+      margin-top:14px;
+      padding:14px;
+      border-radius:22px;
+      background:linear-gradient(135deg,#f2faf4,#fff8df);
+      border:1px solid #dcecdf;
+    }
+
+    .mini-preview b{
+      color:#183b28;
+    }
+
+    .progress{
+      height:9px;
+      background:#dfece3;
+      border-radius:999px;
+      overflow:hidden;
+      margin-top:10px;
+    }
+
+    .progress i{
+      display:block;
+      width:72%;
+      height:100%;
+      background:linear-gradient(90deg,#2f7d4b,#79bd72);
+      border-radius:inherit;
+    }
+
+    .float-chip{
+      position:absolute;
+      z-index:2;
+      background:rgba(255,255,255,.18);
+      border:1px solid rgba(255,255,255,.28);
+      color:white;
+      backdrop-filter:blur(14px);
+      border-radius:999px;
+      padding:10px 15px;
+      font-weight:900;
+      box-shadow:0 16px 40px rgba(0,0,0,.13);
+      animation:floaty 5s ease-in-out infinite;
+    }
+
+    .chip-left{left:6%;bottom:98px;}
+    .chip-right{right:7%;top:112px;animation-delay:-1.5s;}
+
+    @keyframes floaty{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-10px)}
     }
 
     .wrap{
@@ -116,7 +368,13 @@
       border:1px solid var(--line);
       border-radius:18px;
       padding:22px;
-      box-shadow:0 4px 14px rgba(0,0,0,.04);
+      box-shadow:0 10px 30px rgba(24,59,40,.06);
+      transition:transform .28s ease, box-shadow .28s ease;
+    }
+
+    .intro-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 18px 42px rgba(24,59,40,.10);
     }
 
     .intro-card b{
@@ -138,9 +396,15 @@
       border:1px solid var(--line);
       border-radius:22px;
       overflow:hidden;
-      box-shadow:0 5px 18px rgba(0,0,0,.055);
+      box-shadow:0 10px 30px rgba(24,59,40,.07);
       display:flex;
       flex-direction:column;
+      transition:transform .32s ease, box-shadow .32s ease;
+    }
+
+    .story-card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 22px 52px rgba(24,59,40,.13);
     }
 
     .story-card img{
@@ -264,69 +528,81 @@
       }
     }
      
-    .navbar{
-      position:sticky;
-      top:0;
-      z-index:999;
-      background:white;
-      border-bottom:1px solid #d7eadc;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:14px 24px;
-      box-shadow:0 2px 10px rgba(0,0,0,.04);
+    @media(max-width:860px){
+      header.hero{
+        min-height:auto;
+        padding:64px 16px 54px;
+        background-position:center;
+      }
+
+      .hero-inner{
+        grid-template-columns:1fr;
+      }
+
+      .hero-copy{
+        padding:30px 24px;
+      }
+
+      .hero-panel{
+        justify-self:stretch;
+        width:100%;
+      }
+
+      .float-chip{
+        display:none;
+      }
     }
-
-    .nav-logo{
-      font-weight:800;
-      color:#2f7d4b;
-      font-size:1.05rem;
-    }
-
-   .nav-links{
-      display:flex;
-      gap:18px;
-   }
-
-   .nav-links a{
-     color:#294b35;
-     font-weight:700;
-   }
-
-   .nav-links a:hover{
-     color:#2f7d4b;
-   } 
 
     @media(max-width:640px){
-  .navbar{
-    flex-direction:column;
-    align-items:center;
-    gap:10px;
-    padding:12px 10px;
-  }
+      .navbar{
+        flex-direction:column;
+        align-items:center;
+        gap:10px;
+        padding:12px 10px;
+      }
 
-  .nav-logo{
-    font-size:1rem;
-    text-align:center;
-    line-height:1.4;
-    white-space:nowrap;
-  }
+      .nav-logo{
+        font-size:1rem;
+        text-align:center;
+        line-height:1.4;
+        white-space:nowrap;
+      }
 
-  .nav-links{
-    width:100%;
-    justify-content:center;
-    gap:8px;
-    flex-wrap:nowrap;
-  }
+      .nav-links{
+        width:100%;
+        justify-content:center;
+        gap:8px;
+        flex-wrap:nowrap;
+      }
 
-  .nav-links a{
-    font-size:.92rem;
-    padding:6px 8px;
-    border-radius:999px;
-    background:#f0f6f1;
-    white-space:nowrap;
-  }
- }
+      .nav-links a{
+        font-size:.92rem;
+        padding:6px 8px;
+        border-radius:999px;
+        background:#f0f6f1;
+        white-space:nowrap;
+      }
+
+      header.hero h1{
+        letter-spacing:-.04em;
+      }
+
+      .hero-actions .btn{
+        width:100%;
+      }
+
+      .hero-stats{
+        grid-template-columns:1fr;
+      }
+
+      .wrap{
+        padding:26px 14px 54px;
+      }
+
+      .story-card img{
+        height:180px;
+      }
+    }
 
   </style>
 </head>
@@ -350,13 +626,77 @@
 
 
 
-<header>
-  <div class="tag">AI × 青農 × 品牌故事</div>
-  <h1>AI青農品牌故事平台</h1>
-  <p>
-    讓學生透過採訪、攝影、AI創作與圖文整理，協助更多在地農民與農產品被看見。
-    這裡不是商城，而是一個農業故事與品牌教育展示平台。
-  </p>
+<header class="hero">
+  <div class="float-chip chip-left">📸 採訪 × 影像 × 故事</div>
+  <div class="float-chip chip-right">🤖 AI 協作生成品牌內容</div>
+
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="tag">🌱 AI × 青農 × 品牌故事</div>
+      <h1>讓在地農業故事，被更多人看見</h1>
+      <p>
+        透過學生採訪、攝影紀錄與 AI 創作，將青農的理念、農產品特色與地方價值，整理成有溫度的品牌故事展示。
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn" href="#stories">探索品牌故事</a>
+        <a class="btn secondary" href="../teaching/">進入教學系統</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-pill">
+          <strong>AI</strong>
+          <span>文案與腳本協作</span>
+        </div>
+        <div class="stat-pill">
+          <strong>採訪</strong>
+          <span>學生走入農場</span>
+        </div>
+        <div class="stat-pill">
+          <strong>展示</strong>
+          <span>品牌故事頁面</span>
+        </div>
+      </div>
+    </div>
+
+    <aside class="hero-panel" aria-label="AI品牌故事創作流程">
+      <div class="panel-top">
+        <div class="panel-title">品牌故事生成流程</div>
+        <div class="panel-status">Demo</div>
+      </div>
+
+      <div class="workflow">
+        <div class="workflow-item">
+          <div class="workflow-icon">🎙️</div>
+          <div>
+            <b>01 採訪農民</b>
+            <span>整理人物、土地、產品與品牌理念。</span>
+          </div>
+        </div>
+
+        <div class="workflow-item">
+          <div class="workflow-icon">📷</div>
+          <div>
+            <b>02 拍攝素材</b>
+            <span>收集農場、產品、工作場景與短影音素材。</span>
+          </div>
+        </div>
+
+        <div class="workflow-item">
+          <div class="workflow-icon">✨</div>
+          <div>
+            <b>03 AI 內容協作</b>
+            <span>產出故事文章、社群文案與品牌視覺方向。</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mini-preview">
+        <b>故事完成度</b>
+        <div class="progress"><i></i></div>
+      </div>
+    </aside>
+  </div>
 </header>
 
 <main class="wrap">
@@ -396,7 +736,7 @@
     </div>
   </section>
 
-  <section>
+  <section id="stories">
     <div class="section-title">
       <h2>青農品牌故事</h2>
       <p>以下為示範卡片，之後可替換成學生與農民的真實故事。</p>
