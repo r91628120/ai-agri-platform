@@ -701,6 +701,7 @@ init();
 
   // 清空所有欄位
   Object.keys(form).forEach(key => {
+
     form[key] = "";
 
     const el = document.getElementById(key);
@@ -710,8 +711,15 @@ init();
     }
   });
 
-  // 更新 prompt
-  updatePrompt();
+  // 重置完成度
+  document.getElementById("countText").innerText = `0/${Object.keys(form).length}`;
+
+  // 重置進度條
+  document.getElementById("progressBar").style.width = "0%";
+
+  // 清空 Prompt 顯示區
+  document.getElementById("promptOutput").innerText =
+    "請先填寫左側採訪資料，系統會自動產生 AI 提示詞。";
 
   // 提示訊息
   showMessage("🧹 已清除所有內容");
