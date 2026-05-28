@@ -359,7 +359,7 @@
 
 <main class="wrap">
   <div class="notice">
-    <strong>使用方式：</strong>學生採訪農民後，將資料填入下方欄位。右側會即時產生 Prompt，可複製到 ChatGPT 使用。若資料不足，AI 會協助列出需要補問的問題。
+    <strong>使用方式：</strong>學生採訪農民後，將資料填入下方欄位。右側會即時產生 Prompt，可複製到 AI農業 使用。若資料不足，AI 會協助列出需要補問的問題。
   </div>
    
     <div class="ai-helper-box">
@@ -386,12 +386,19 @@
 
     <aside class="prompt-panel">
       <div class="prompt-top">
-        <div>
-          <h2>AI Prompt</h2>
-          <div class="small">完成度：<span id="countText">0/0</span></div>
-        </div>
-        <button onclick="copyPrompt()">複製</button>
+      <div>
+           <h2>AI Prompt (AI提示詞)</h2>
+        <div class="small">完成度：<span id="countText">0/0</span></div>
       </div>
+
+      <div style="display:flex; gap:10px;">
+        <button onclick="copyPrompt()">複製</button>
+
+        <button class="secondary" onclick="clearAllFields()">
+           清除提示詞
+        </button>
+      </div>
+    </div>
       <div class="progress"><div id="progressBar"></div></div>
       <div class="mode-grid">
         <button class="secondary active" data-mode="blog" onclick="setMode('blog')">部落格</button>
@@ -645,16 +652,44 @@ function updatePrompt(){
 
 function copyPrompt(){
   const text = document.getElementById("promptOutput").innerText;
-  navigator.clipboard.writeText(text).then(showCopyOk);
+  navigator.clipboard.writeText(text)
+  .then(() => showMessage("✅ 已複製到剪貼簿"));
 }
 
-function showCopyOk(){
+function showMessage(message){
+
   const box = document.getElementById("copyOk");
+
+  box.innerText = message;
   box.style.display = "block";
-  setTimeout(()=>{ box.style.display = "none"; }, 1800);
+
+  setTimeout(()=>{
+    box.style.display = "none";
+  },1800);
 }
 
 init();
+
+ function clearAllFields(){
+
+  // 清空所有欄位
+  Object.keys(form).forEach(key => {
+    form[key] = "";
+
+    const el = document.getElementById(key);
+
+    if(el){
+      el.value = "";
+    }
+  });
+
+  // 更新 prompt
+  updatePrompt();
+
+  // 提示訊息
+  showMessage("🧹 已清除所有內容");
+}
+
 </script>
 <script 
   data-goatcounter="https://ai-agri-education.goatcounter.com/count"
