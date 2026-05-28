@@ -145,11 +145,23 @@
       margin-bottom:14px;
     }
     .prompt-top h2{margin:0;color:var(--dark)}
+    
+    
     .mode-grid{
       display:grid;
       grid-template-columns:repeat(2,1fr);
-      gap:8px;
-      margin-bottom:12px;
+      gap:10px;
+      margin-bottom:14px;
+    }
+
+    .mode-grid button{
+      min-height:58px;
+      line-height:1.35;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:12px;
     }
     button{
       border:none;
@@ -387,7 +399,7 @@
     <aside class="prompt-panel">
       <div class="prompt-top">
       <div>
-           <h2>AI Prompt (AI提示詞)</h2>
+           <h2>AI 提示詞</h2>
         <div class="small">完成度：<span id="countText">0/0</span></div>
       </div>
 
@@ -400,11 +412,26 @@
       </div>
     </div>
       <div class="progress"><div id="progressBar"></div></div>
+      
+       <p class="small">
+         選擇要生成的內容形式
+       </p>
       <div class="mode-grid">
-        <button class="secondary active" data-mode="blog" onclick="setMode('blog')">部落格</button>
-        <button class="secondary" data-mode="social" onclick="setMode('social')">社群貼文</button>
-        <button class="secondary" data-mode="interview" onclick="setMode('interview')">採訪紀錄</button>
-        <button class="secondary" data-mode="product" onclick="setMode('product')">銷售頁</button>
+         <button class="secondary active" data-mode="blog" onclick="setMode('blog')">
+           Vocus農業故事文章
+         </button>
+
+         <button class="secondary" data-mode="social" onclick="setMode('social')">
+            社群貼文
+         </button>
+
+         <button class="secondary" data-mode="interview" onclick="setMode('interview')">
+            採訪紀錄
+         </button>
+
+         <button class="secondary" data-mode="product" onclick="setMode('product')">
+           銷售頁
+         </button>
       </div>
       <pre id="promptOutput"></pre>
     </aside>
