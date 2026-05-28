@@ -471,16 +471,23 @@
       <textarea id="featurePoint" placeholder="例如：產地直送、顆粒飽滿、口感綿密、適合煮紅豆湯與甜點。"></textarea>
 
       <button class="btn" onclick="generatePrompt()">產生完整 Prompt</button>
-      <button class="btn secondary" onclick="copyGeneratedPrompt()">複製產生結果</button>
 
-      <pre id="generatedPrompt">請先填寫上方資料，再按下「產生完整 Prompt」，直接複製Prompt指令，貼到 ChatGPT 或 AI農業創作助理 使用。</pre>
+      <button class="btn secondary" onclick="copyGeneratedPrompt()">
+         複製產生結果
+      </button>
+
+      <button class="btn secondary" onclick="clearPromptForm()">
+        清除提示詞
+      </button>
+
+      <pre id="generatedPrompt">請先填寫上方資料，再按下「產生完整 Prompt」，直接複製Prompt指令，貼到 AI農業創作助理 使用。</pre>
     </div>
   </section>
 
   <section>
     <div class="section-title">
       <h2>三、常用 AI 創作 Prompt 工具箱</h2>
-      <p>學生使用二、AI農業品牌指令產生器後，可再直接複製以下指令，再貼到 ChatGPT 或 AI農業創作助理 使用，產生更多創作作品。</p>
+      <p>學生使用二、AI農業品牌指令產生器後，可再直接複製以下指令，再貼到 AI農業創作助理 使用，產生更多創作作品。</p>
     </div>
 
     <div class="prompt-card">
@@ -682,21 +689,40 @@ ${featurePoint}
 
   function copyText(id){
     const text = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(text).then(showCopyOk);
+    navigator.clipboard.writeText(text).then(() => showCopyOkMessage("✅ 已複製到剪貼簿"));
   }
 
   function copyGeneratedPrompt(){
     const text = document.getElementById("generatedPrompt").innerText;
-    navigator.clipboard.writeText(text).then(showCopyOk);
+    navigator.clipboard.writeText(text).then(() => showCopyOkMessage("✅ 已複製到剪貼簿"));
   }
 
-  function showCopyOk(){
+  function showCopyOkMessage(message){
     const box = document.getElementById("copyOk");
-    box.style.display = "block";
-    setTimeout(() => {
-      box.style.display = "none";
-    }, 1800);
+
+          box.innerText = message;
+          box.style.display = "block";
+
+      setTimeout(() => {
+          box.style.display = "none";
+     }, 1800);
   }
+
+   function clearPromptForm(){
+
+  document.getElementById("farmName").value = "";
+  document.getElementById("productName").value = "";
+  document.getElementById("brandStyle").selectedIndex = 0;
+  document.getElementById("platform").selectedIndex = 0;
+  document.getElementById("storyPoint").value = "";
+  document.getElementById("featurePoint").value = "";
+
+  document.getElementById("generatedPrompt").innerText =
+    "請先填寫上方資料，再按下「產生完整 Prompt」，直接複製Prompt指令，貼到 AI農業創作助理 使用。";
+
+  showCopyOkMessage("🧹 已清除內容");
+}
+
 </script>
 
 <script 
