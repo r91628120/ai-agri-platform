@@ -41,19 +41,28 @@
     }
 
     header{
-      min-height:76vh;
+      min-height:88vh;
+
       background:
-        linear-gradient(rgba(24,59,40,.78),rgba(24,59,40,.78)),
-        url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1800&q=80");
+       linear-gradient(
+        rgba(255,255,255,.58),
+        rgba(255,255,255,.62)
+      ),
+      url("./assets/agri-education-hero.png");
+
       background-size:cover;
       background-position:center;
-      color:white;
+      background-repeat:no-repeat;
+
+      color:#183b28;
+
       display:flex;
       align-items:center;
       justify-content:center;
       text-align:center;
+
       padding:72px 20px;
-    }
+   }
 
     .hero{
       max-width:900px;
@@ -61,8 +70,9 @@
 
     .tag{
       display:inline-block;
-      background:rgba(255,255,255,.16);
-      border:1px solid rgba(255,255,255,.35);
+      background:rgba(47,125,75,.12);
+      border:1px solid rgba(47,125,75,.22);
+      backdrop-filter:blur(10px);
       padding:6px 14px;
       border-radius:999px;
       font-size:.92rem;
@@ -93,7 +103,7 @@
     .btn{
       display:inline-block;
       background:var(--green);
-      color:white;
+      color:#183b28;
       padding:12px 20px;
       border-radius:999px;
       font-weight:700;
